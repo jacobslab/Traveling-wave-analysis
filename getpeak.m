@@ -1,9 +1,7 @@
-function [peak]=getpeak(Power,frequency,ll,ul,threshold)
+function [peak]=getpeak(Pow,frequency,ll,ul,threshold)
 % this is a peak picking program for mutiple peaks
-Pow=log(Power);
-freqs=log(frequency);
-brob=robustfit(freqs(frequency>ll&frequency<ul),Pow(frequency>ll&frequency<ul));
+freqs=log(frequency); % transform to log space
+brob=robustfit(freqs(freqs>ll&freqs<ul),Pow(freqs>ll&freqs<ul));
 sub=Pow-(brob(1)+brob(2)*freqs);
 TD=mean(sub)+threshold*std(sub);
-peak=frequency(sub>TD&islocalmax(sub)&frequency>ll&frequency<ul);
-
+peak=frequency(sub>TD&islocalmax(sub)&freqs>ll&freqs<ul);
