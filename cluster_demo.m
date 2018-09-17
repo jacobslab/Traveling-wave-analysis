@@ -1,6 +1,6 @@
 clear
 load mni_cortical_surface % load brain module
-load PowCoords % load power spectrum, frequency and location
+load PowCoords % load power spectrum, frequency and coordinates
 %running cluster algo
 clusters=findCluster(pow,coords,freqs);
 %% plot brain and the 2 example clusters from the same subject
