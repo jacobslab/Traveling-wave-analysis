@@ -1,18 +1,22 @@
 function [direction,spatial_frequency,sl,Rsquared] = circ_lin_regress_2D(circularV,linearV,visulization)
 % circ_lin_regress_2D is a function used to fit a 2D linear variables to a
-% circular variable. One exmaple of the application is to fit phase traveling wave
-% from linear coordinates.
+% circular variable,handles wrapping-up cases. One exmaple of the application is to fit phase traveling wave
+% from linear coordinates.Please note the direction of wave propagation will be 180 degree from this
+% number as wave propagates to phase descending direction.
 %
 % For method details, see Zhang H, Watrous AJ, Patel A, Jacobs J. Theta and
 % alpha oscillations are traveling waves in the human neocortex. Neuron. 2018.
 %
-% linearV is a N by 2 matrix convey the linear variables. circularV (in radian) is a N
-% by 1 array, which we are trying to fit. The algorithm handles wrapping-up cases on its own.
-% visulization is a logic variable. It generlizes 2 visualization plot. One is the residual.
+% Input
+% linearV is a N by 2 matrix convey the linear variables. 
+% circularV (in radian) is a N by 1 array, which we are trying to fit. 
+% The algorithm handles wrapping-up cases on its own.
+% visulization is a logic variable. It generlizes 2 visualization plot. One
+% shows the parameter space with residual and the other shows the fitting
+% plan.
 %
-% direction of circular variable ascending with linear variables. Please
-% note the direction of wave propagation will be 180 degree from this
-% number as wave propagates to phase descending direction.
+% Output
+% direction of circular variable ascending with linear variables.
 % spatial_frequency is the change rate of circular variable to linear
 % variables at the ascending direction. The unit is radian per linear unit
 % sl is the slopes of phase change relative to each column in linearV.
@@ -87,6 +91,9 @@ if visulization
         scatter3(pos_x(i),pos_y(i),phase(i),60,'r','filled') % plot the real phase values
         plot3([pos_x(i),pos_x(i)],[pos_y(i),pos_y(i)],[phase(i),pos_circ(i)],'k','linewidth',2) % lineup the real phase values and the plane
     end
+    xlabel('X coordinates')
+    ylabel('Y coordinates')
+    zlabel('Circular values (Radient)')
     title('Circular-linear regression data fitting');
     %axis square
 end
