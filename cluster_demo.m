@@ -1,12 +1,15 @@
+%demo to show how clustering algorithm works on real brain data.
 clear
 load mni_cortical_surface % load brain module
 load PowCoords % load power spectrum, frequency and coordinates
 %running cluster algo
 clusters=findCluster(pow,coords,freqs);
-%% plot brain and the 2 example clusters from the same subject
+% plot clustering result from the same subject on the brain
 lc=jet(15);
-figure(1)
+
+%% plot the first cluster
 c=1;
+figure(1)
 hs = patch('faces',f,'vertices',v,'edgecolor','none','facecolor',[.5 .5 .5]);set(hs,'facealpha',.2)
 axis equal;axis off;
 hold on
@@ -27,6 +30,7 @@ set(hb,'ticklabels',{'1','8','15'})
 set(hb,'fontsize',10)
 set(hb,'Position',[0.88 0.200 0.02 0.60])
 
+%% plot the second cluster
 figure(2)
 c=3;
 hs = patch('faces',f,'vertices',v,'edgecolor','none','facecolor',[.5 .5 .5]);set(hs,'facealpha',.2)
